@@ -7,7 +7,7 @@ const AuthenticatedUserPage =  () => {
     return (
         <div>
             <h1>AuthenticatedUserPage</h1>
-            <p>userName: {userName}</p>
+            <p>Authenticated User: {userName}</p>
 
         </div>
 

@@ -23,6 +23,8 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      // Add the indentation rule for 4 spaces
+      "indent": ["error", 4], // or use "tab" instead of 4 for tabs
     },
   },
 )
