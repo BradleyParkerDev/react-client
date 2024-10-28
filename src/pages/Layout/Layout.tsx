@@ -14,7 +14,7 @@ const Layout =  () =>{
         };
     }, []); // Empty dependency array to run the effect once
     return(
-        <div id='container' className='bg-[white] w-[100vw] max-w-[1440px] h-[100vh] '>
+        <div id='container' className='bg-[white] w-[100vw] max-w-[1440px] min-h-[100vh] h-[auto] '>
             <Outlet/>
         </div>
     )

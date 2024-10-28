@@ -5,7 +5,9 @@ const HomePage = () => {
         <div>
             
             HomePage
-            <Button>Button</Button>
+            <Button className="transform transition ease-out duration-200 hover:scale-110">
+                Hover to Enlarge
+            </Button>
         </div>
     )
 }
