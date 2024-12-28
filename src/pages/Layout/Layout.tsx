@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-
+import NavBar from "@/components/NavBar/NavBar";
 const Layout =  () =>{
 
     // Use useEffect to safely modify the DOM
@@ -15,6 +15,7 @@ const Layout =  () =>{
     }, []); // Empty dependency array to run the effect once
     return(
         <div id='container' className='bg-[white] w-[100vw] max-w-[1440px] min-h-[100vh] h-[auto] '>
+            <NavBar/>
             <Outlet/>
         </div>
     )

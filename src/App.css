@@ -1,5 +1,5 @@
 /* 
 Not neccessary for use.
-Can be used as a traditional a css file, with an import statement.
-index.css is imported into main.tsx, it handles all of the application css.
+Can be used as a traditional a css file, with an import statement in a specified tsx file.
+index.css is imported into main.tsx, it handles all of the application's css.
 */

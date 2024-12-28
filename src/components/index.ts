@@ -1,6 +1,10 @@
 import  LoginForm  from "./LoginForm/LoginForm";
-import RegistrationForm from "./RegistrationForm/RegistrationForm";
+import RegistrationForm1 from "./RegistrationForms/RegistrationForm1";
+import RegistrationForm2 from "./RegistrationForms/RegistrationForm2";
+
 export const forms = {
     LoginForm,
-    RegistrationForm
+    RegistrationForm1,
+    RegistrationForm2,
+
 }

@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-
+import { useState } from 'react'
 import {
     Form,
     FormControl,
@@ -31,7 +31,22 @@ const formSchema = z.object({
         .regex(/[a-zA-Z0-9]/, { message: 'Password must be alphanumeric' }),
 })
 
+
 const LoginForm = () => {
+
+
+    // toggle password
+    const [passwordInputType, setPasswordInputType] = useState('password')
+    const togglePassword = () =>{
+        if(passwordInputType === 'password'){
+            setPasswordInputType('text')
+        }else{
+            setPasswordInputType('password')
+        }
+    }
+
+
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -57,17 +72,19 @@ const LoginForm = () => {
 
     return (
         <div className="flex flex-col min-h-[50vh] h-full w-full items-center justify-center px-4">
-            <Card className="mx-auto max-w-sm">
+            <Card className="mx-auto w-[100%] max-w-[350px]">
                 <CardHeader>
                     <CardTitle className="text-2xl">Login</CardTitle>
                     <CardDescription>
-            Enter your email and password to login to your account.
+                        Enter your account information to login .
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             <div className="grid gap-4">
+
+                                {/* Email */}
                                 <FormField
                                     control={form.control}
                                     name="email"
@@ -87,6 +104,8 @@ const LoginForm = () => {
                                         </FormItem>
                                     )}
                                 />
+
+                                {/* Password */}
                                 <FormField
                                     control={form.control}
                                     name="password"
@@ -94,15 +113,11 @@ const LoginForm = () => {
                                         <FormItem className="grid gap-2">
                                             <div className="flex justify-between items-center">
                                                 <FormLabel htmlFor="password">Password</FormLabel>
-                                                <span
-                                                    className="ml-auto inline-block text-sm underline"
-                                                >
-                          Forgot your password?
-                                                </span>
                                             </div>
                                             <FormControl>
                                                 <Input
                                                     id="password"
+                                                    type= {passwordInputType}
                                                     placeholder="******"
                                                     autoComplete="current-password"
                                                     {...field}
@@ -112,16 +127,31 @@ const LoginForm = () => {
                                         </FormItem>
                                     )}
                                 />
+
+                                {/* Password Toggle */}
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        onClick={togglePassword}
+                                        className="mr-2"
+                                    />
+                                    <label className="text-[14px]">
+                                        Show Password
+                                    </label>
+                                </div>
+
+                                {/* Submit Button */}
                                 <Button type="submit" className="w-full">
-                  Login
+                                    Login
                                 </Button>
+
                             </div>
                         </form>
                     </Form>
                     <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{' '}
+                        Don&apos;t have an account?{' '}
                         <span  className="underline">
-              Sign up
+                            Sign up
                         </span>
                     </div>
                 </CardContent>

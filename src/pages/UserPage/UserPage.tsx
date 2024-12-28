@@ -1,5 +1,5 @@
 import { forms } from "@/components";
-const {LoginForm, RegistrationForm} = forms
+const {LoginForm, RegistrationForm1, RegistrationForm2} = forms
 const UserPage = () => {
     return (
         <div>
@@ -7,7 +7,9 @@ const UserPage = () => {
             <br/>
             <LoginForm />
             <br/>
-            <RegistrationForm />
+            <RegistrationForm1 />
+            <br/>
+            <RegistrationForm2 />
         </div>
 
     )

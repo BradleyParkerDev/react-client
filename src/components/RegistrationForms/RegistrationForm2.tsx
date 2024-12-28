@@ -2,6 +2,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+import { useState } from 'react'
 
 import {
     Form,
@@ -24,9 +25,9 @@ import { Input } from '@/components/ui/input'
 // Define validation schema using Zod
 const formSchema = z
     .object({
-        name: z
+        userName: z
             .string()
-            .min(2, { message: 'Name must be at least 2 characters long' }),
+            .min(5, { message: 'Name must be at least 5 characters long' }),
         email: z.string().email({ message: 'Invalid email address' }),
         password: z
             .string()
@@ -39,11 +40,24 @@ const formSchema = z
         message: 'Passwords do not match',
     })
 
-export default function RegistrationForm() {
+export default function RegistrationForm2() {
+
+
+    // toggle password
+    const [passwordInputType, setPasswordInputType] = useState('password')
+    const togglePassword = () =>{
+        if(passwordInputType === 'password'){
+            setPasswordInputType('text')
+        }else{
+            setPasswordInputType('password')
+        }
+    }
+
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: '',
+            userName: '',
             email: '',
             password: '',
             confirmPassword: '',
@@ -67,26 +81,31 @@ export default function RegistrationForm() {
 
     return (
         <div className="flex min-h-[60vh] h-full w-full items-center justify-center px-4">
-            <Card className="mx-auto max-w-sm">
+            <Card className="mx-auto w-[100%] max-w-[350px]">
                 <CardHeader>
-                    <CardTitle className="text-2xl">Register</CardTitle>
+                    <CardTitle className="flex flex-row text-2xl">Registration <p className='pl-[10px] text-[16px]'> (2 / 2)</p></CardTitle>
                     <CardDescription>
-            Create a new account by filling out the form below.
+                        Complete registration by filling out the form below.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             <div className="grid gap-4">
-                                {/* Name Field */}
+                                {/* Username Field */}
                                 <FormField
                                     control={form.control}
-                                    name="name"
+                                    name="userName"
                                     render={({ field }) => (
                                         <FormItem className="grid gap-2">
-                                            <FormLabel htmlFor="name">Full Name</FormLabel>
+                                            <FormLabel htmlFor="userName">Username</FormLabel>
                                             <FormControl>
-                                                <Input id="name" placeholder="John Doe" {...field} />
+                                                <Input 
+                                                    id="userName" 
+                                                    placeholder="JD123" 
+                                                    autoComplete="off"
+                                                    {...field} 
+                                                />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -105,7 +124,7 @@ export default function RegistrationForm() {
                                                     id="email"
                                                     placeholder="johndoe@mail.com"
                                                     type="email"
-                                                    autoComplete="email"
+                                                    autoComplete="off"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -126,6 +145,7 @@ export default function RegistrationForm() {
                                                 <Input
                                                     id="password"
                                                     placeholder="******"
+                                                    type= {passwordInputType}
                                                     autoComplete="new-password"
                                                     {...field}
                                                 />
@@ -142,12 +162,13 @@ export default function RegistrationForm() {
                                     render={({ field }) => (
                                         <FormItem className="grid gap-2">
                                             <FormLabel htmlFor="confirmPassword">
-                        Confirm Password
+                                                Confirm Password
                                             </FormLabel>
                                             <FormControl>
                                                 <Input
                                                     id="confirmPassword"
                                                     placeholder="******"
+                                                    type={passwordInputType}
                                                     autoComplete="new-password"
                                                     {...field}
                                                 />
@@ -157,16 +178,35 @@ export default function RegistrationForm() {
                                     )}
                                 />
 
-                                <Button type="submit" className="w-full">
-                  Register
+                                {/* Password Toggle */}
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        onClick={togglePassword}
+                                        className="mr-2"
+                                    />
+                                    <label className="text-[14px]">
+                                        Show Password
+                                    </label>
+                                </div>
+
+                                <Button type='button' className="w-full bg-gray-800">
+                                    Back
+                                </Button>
+                                <Button 
+                                    type="submit"
+                                    disabled={form.formState.isSubmitting} // Optionally disable during submission 
+                                    className="w-full bg-red-600 transform transition ease-out duration-200 hover:scale-110"
+                                >
+                                    Register
                                 </Button>
                             </div>
                         </form>
                     </Form>
                     <div className="mt-4 text-center text-sm">
-            Already have an account?{' '}
+                        Already have an account?{' '}
                         <span  className="underline">
-              Login
+                            Login
                         </span>
                     </div>
                 </CardContent>
