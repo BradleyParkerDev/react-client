@@ -196,10 +196,11 @@ export default function RegistrationForm2() {
                                 <Button 
                                     type="submit"
                                     disabled={form.formState.isSubmitting} // Optionally disable during submission 
-                                    className="w-full bg-red-600 transform transition ease-out duration-200 hover:scale-110"
+                                    className="w-full bg-red-600 hover:bg-red-600 transform transition ease-out duration-200 hover:scale-105"
                                 >
                                     Register
                                 </Button>
+                                
                             </div>
                         </form>
                     </Form>
