@@ -3,7 +3,7 @@ import { MenuIcon } from "lucide-react";
 import { AvatarIcon } from "@radix-ui/react-icons";
 import { EllipsisVertical } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import Axios from "@/lib/Axios/Axios";
+import axiosInstance from "@/lib/axiosInstance/axiosInstance";
 
 interface NavBarProps {
     className?: string; // Optional className prop
@@ -19,7 +19,7 @@ const NavBar: React.FC<NavBarProps> = ({ className }) => {
 
         const hitServerIndexRoute = async () =>{
 
-            const response = await Axios.get(`/`)
+            const response = await axiosInstance.get(`/`)
             console.log(response)
         }
 
